@@ -16,6 +16,6 @@
 
 👥팀원
 -----------
-정은다
+정은다 https://github.com/EundaChung
 
 임예진 https://github.com/I-mYejin
