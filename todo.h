@@ -12,3 +12,5 @@ typedef struct {
 int deleteTodo(ToDo *s); //일정 삭제
 void todoCheck(ToDo s); //일정 완료 체크 표시
 void todoRead(ToDo s); //일정 리스트 출력
+
+int addTodo(ToDo *t); //일정 추가
