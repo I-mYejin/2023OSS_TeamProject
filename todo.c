@@ -54,5 +54,9 @@ int loadData(ToDo *t){
 
 }
 
+int updateTodo(ToDo *t){
+    return addTodo(t);
+    }
+
 
 

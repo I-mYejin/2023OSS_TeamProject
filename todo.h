@@ -14,3 +14,4 @@ void todoCheck(ToDo s); //일정 완료 체크 표시
 void todoRead(ToDo s); //일정 리스트 출력
 
 int addTodo(ToDo *t); //일정 추가
+int updateTodo(ToDo *t); //일정 수정: return addTodo()
