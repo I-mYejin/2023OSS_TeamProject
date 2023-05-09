@@ -13,3 +13,16 @@ int addTodo(ToDo *t){
     return 1;
 }
 
+void saveData(ToDo *t, int count){
+    FILE *fp;
+    char filename[20];
+    fp = fopen(filename, "wt");
+    for(int i=0; i<count; i++){
+        if(t[i].hrs == -1) continue;
+        fprintf(fp, "%s %s %s %d \n", t[i].title, t[i].deadline, t[i].day, t[i].hrs);
+    }
+    fclose(fp);
+    printf("=> 파일에 저장됨! \n");
+
+}
+
