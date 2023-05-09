@@ -12,7 +12,7 @@ int addTodo(ToDo *t){
     printf("=> 새로운 일정이 추가되었습니다!");
     return 1;
 }
-
+//미완성
 void saveData(ToDo *t, int count){
     FILE *fp;
     char filename[20];
@@ -28,7 +28,7 @@ void saveData(ToDo *t, int count){
     printf("=> %s 파일에 저장됨! \n",filename);
 
 }
-
+//미완성
 int loadData(ToDo *t){
     int i, count = 0;
     FILE *fp;
