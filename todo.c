@@ -1,5 +1,6 @@
 #include "todo.h"
 
+//일정 추가 기능
 int addTodo(ToDo *t){
     printf("Title: ");
     scanf("%s", t->title);
@@ -58,5 +59,31 @@ int updateTodo(ToDo *t){
     return addTodo(t);
     }
 
+//일정 삭제 기능
+int deleteTodo(ToDo *t){
+    t->check = -1;
+    return 1;
+}
 
 
+//일정 리스트 출력 기능
+void todoRead(ToDo t){
+    printf("%s  %s  %s  %d %s\n", t.title, t.deadline, t.day, t.hrs, t.check);
+}
+
+int listTodo(ToDo *t[], int count){
+    printf("\nNo    Title   Deadline    Day     Hours   Finish\n");
+    printf("====================================================\n");
+    for(int i=0; i<count; i++){
+        if(t[i] -> check == -1) continue;
+        printf("%2d    ", i+1);
+        todoRead(*t[i]);
+        //일정완료 체크표시
+        if(t[i]->check == 1){ 
+            printf("  √\n");
+        } else {
+            printf(" ");
+        }
+    }
+    printf("\n");
+}
