@@ -21,9 +21,11 @@ void saveData(ToDo *t, int count){
     scanf("%s", filename);
 
     fp = fopen(filename, "wt");
+    printf("\nNo Title Deadline Day Hours Finish\n");
+    
     for(int i=0; i<count; i++){
         if(t[i].hrs == -1) continue;
-        fprintf(fp, "%s %s %s %d \n", t[i].title, t[i].deadline, t[i].day, t[i].hrs);
+        fprintf(fp, "%2d %s %s %s %d %s\n", i+1, t[i].title, t[i].deadline, t[i].day, t[i].hrs, t[i].check);
     }
     fclose(fp);
     printf("=> %s 파일에 저장됨! \n",filename);
