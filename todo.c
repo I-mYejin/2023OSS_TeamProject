@@ -89,3 +89,11 @@ int listTodo(ToDo *t[], int count){
     }
     printf("\n");
 }
+
+
+//main
+int main(void) {
+  ToDo *t[100];
+  int index = 0;
+  int count = 0;
+}
