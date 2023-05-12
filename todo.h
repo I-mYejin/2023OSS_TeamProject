@@ -15,4 +15,5 @@ int listTodo(ToDo *t[], int count);
 
 int addTodo(ToDo *t); //일정 추가
 int updateTodo(ToDo *t); //일정 수정: return addTodo()
+int selectMenu();
 
