@@ -1,5 +1,22 @@
 #include "todo.h"
 
+//미완성
+int selectMenu(){
+    int menu;
+    printf("\n *** 1Jung *** \n");
+    printf("0. 종료\n\n");
+    printf("1. 일정 조회\n");
+    printf("2. 일정 추가\n");
+    printf("3. 일정 수정\n");
+    printf("4. 알정 삭제\n");
+    printf("5. 파일 저장\n");
+    printf("6. 파일 불러오기\n");
+    printf("Select Menu: ");
+    scanf("%d", &menu);
+    return menu;   
+}
+
+
 //일정 추가 기능
 int addTodo(ToDo *t){
     printf("Title: ");
@@ -91,9 +108,4 @@ int listTodo(ToDo *t[], int count){
 }
 
 
-//main
-int main(void) {
-  ToDo *t[100];
-  int index = 0;
-  int count = 0;
-}
+
