@@ -28,9 +28,6 @@ int main(void) {
     else if (menu == 5){
 
     }
-    else if (menu == 5){
-
-    }
     else if(menu == 6){
         
     }
