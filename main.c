@@ -14,15 +14,15 @@ int main(void) {
 
     }
     else if(menu == 2){
+      count += 1;
+      addTodo(&t[index++]);
 
     }
     else if (menu == 3){
+      updateTodo(t);
 
     }
     else if (menu == 4){
-
-    }
-    else if (menu == 5){
 
     }
     else if (menu == 5){
