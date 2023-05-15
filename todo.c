@@ -108,26 +108,5 @@ int listTodo(ToDo *t[], int count){
 }
 
 
-//main
-int main(void){
-    ToDo *t[100];
-    int index = 0;
-    int count = 0;
-    int menu;
-
-    while (1) {
-        menu = selectMenu();
-        if (menu == 0) {
-            break;
-        }
-
-        if (menu == 1) {
-            if(count > 0) {
-                listTodo(t, index);
-            }
-        }
-    }
-}
-
 
 
