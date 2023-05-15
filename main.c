@@ -10,9 +10,13 @@ int main(void) {
   while(1){
     menu = selectMenu();
     if(menu == 0) break;
-    if (menu == 1){
-
+    
+    if (menu == 1) {
+      if(count > 0) {
+        listTodo(t, index);
+      }
     }
+    
     else if(menu == 2){
       count += 1;
       addTodo(&t[index++]);
