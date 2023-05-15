@@ -5,7 +5,7 @@ int selectMenu(){
     int menu;
     printf("\n *** 1Jung *** \n");
     printf("0. 종료\n\n");
-    printf("1. 일정 조회\n");
+    printf("1. 일정 조회\n"); //일정 리스트 출력
     printf("2. 일정 추가\n");
     printf("3. 일정 수정\n");
     printf("4. 알정 삭제\n");
@@ -105,6 +105,28 @@ int listTodo(ToDo *t[], int count){
         }
     }
     printf("\n");
+}
+
+
+//main
+int main(void){
+    ToDo *t[100];
+    int index = 0;
+    int count = 0;
+    int menu;
+
+    while (1) {
+        menu = selectMenu();
+        if (menu == 0) {
+            break;
+        }
+
+        if (menu == 1) {
+            if(count > 0) {
+                listTodo(t, index);
+            }
+        }
+    }
 }
 
 
