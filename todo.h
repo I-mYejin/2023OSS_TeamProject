@@ -6,7 +6,7 @@ typedef struct {
     char deadline[20]; //ex) 2023-05-08
     char day[10]; // ex) Mon
     int hrs; //ex) 4(예상 소요 시간)
-    int check = 0; // ex) 0, 1(완료하면 1 입력받아서 √표시)
+    int check; // ex) 0, 1(완료하면 1 입력받아서 √표시)
 } ToDo;
 
 int deleteTodo(ToDo *t); //일정 삭제
