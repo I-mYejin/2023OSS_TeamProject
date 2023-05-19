@@ -5,7 +5,7 @@ int selectMenu(){
     int menu;
     printf("\n *** 1Jung *** \n");
     printf("0. 종료\n\n");
-    printf("1. 일정 조회\n"); //일정 리스트 출력
+    printf("1. 일정 조회\n"); //일정 리스트 출력 + 일정완료 체크표시
     printf("2. 일정 추가\n");
     printf("3. 일정 수정\n");
     printf("4. 알정 삭제\n");
