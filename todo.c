@@ -12,6 +12,7 @@ int selectMenu(){
     printf("4. 알정 삭제\n");
     printf("5. 파일 저장\n");
     printf("6. 파일 불러오기\n");
+    printf("7. 일정 추가(요일별)\n");
     printf("Select Menu: ");
     scanf("%d", &menu);
     return menu;   
