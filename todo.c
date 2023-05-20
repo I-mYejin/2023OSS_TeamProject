@@ -1,7 +1,6 @@
 #include "todo.h"
 #include <string.h>
 
-//미완성
 int selectMenu(){
     int menu;
     printf("\n *** 1Jung *** \n");
@@ -18,18 +17,27 @@ int selectMenu(){
     return menu;   
 }
 
-
 //일정 추가 기능
 int addTodo(ToDo *t){
   int repeat;
   char repeatDeadline[20];
+  int repeatDays;
   printf("1. 단순 추가 2. 반복 추가 >> ");
   scanf("%d", &repeat);
   if(repeat == 2){
-    printf("반복 추가할 날짜 (format: 20XX-XX-XX)>> ");
+    printf("last date to add Todo(format: 20XX-XX-XX)>> "); //반복 일정을 추가할 마지막 날짜
     scanf("%s", &repeatDeadline);
 
+    printf("Title: ");
+    scanf("%s", t->title);
+    printf("Deadline(format: after * days): ");
+    scanf("%d", &repeatDays);
+    printf("Estimated time to complete(hrs): ");
+    scanf("%d", t->hrs);
+    printf("=> 새로운 반복 일정이 추가되었습니다!");
+
   }
+  else{
     printf("Title: ");
     scanf("%s", t->title);
     printf("Deadline(format: 20XX-XX-XX): ");
@@ -40,6 +48,7 @@ int addTodo(ToDo *t){
     scanf("%d", t->hrs);
     printf("=> 새로운 일정이 추가되었습니다!");
     return 1;
+  }
 }
 //미완성
 void saveData(ToDo *t, int count){
