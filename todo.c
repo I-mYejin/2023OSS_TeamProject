@@ -26,15 +26,16 @@ int addTodo(ToDo *t){
   scanf("%d", &repeat);
   if(repeat == 2){
     printf("last date to add Todo(format: 20XX-XX-XX)>> "); //반복 일정을 추가할 마지막 날짜
-    scanf("%s", &repeatDeadline);
+    scanf("%s", repeatDeadline);
 
     printf("Title: ");
     scanf("%s", t->title);
     printf("Deadline(format: after * days): ");
     scanf("%d", &repeatDays);
     printf("Estimated time to complete(hrs): ");
-    scanf("%d", t->hrs);
+    scanf("%d", &t->hrs);
     printf("=> 새로운 반복 일정이 추가되었습니다!");
+    return 1;
 
   }
   else{
@@ -45,7 +46,7 @@ int addTodo(ToDo *t){
     printf("Day(Mon, Tues, Wed, Thurs, Fri, Sat, Sun): ");
     scanf("%s", t->day);
     printf("Estimated time to complete(hrs): ");
-    scanf("%d", t->hrs);
+    scanf("%d", &t->hrs);
     printf("=> 새로운 일정이 추가되었습니다!");
     return 1;
   }
@@ -62,7 +63,7 @@ void saveData(ToDo *t, int count){
     
     for(int i=0; i<count; i++){
         if(t[i].hrs == -1) continue;
-        fprintf(fp, "%2d %s %s %s %d %s\n", i+1, t[i].title, t[i].deadline, t[i].day, t[i].hrs, t[i].check);
+        fprintf(fp, "%2d %s %s %s %d %d\n", i+1, t[i].title, t[i].deadline, t[i].day, t[i].hrs, t[i].check);
     }
     fclose(fp);
     printf("=> %s 파일에 저장됨! \n",filename);
@@ -86,7 +87,7 @@ int loadData(ToDo *t){
         if(feof(fp)) break;
         fscanf(fp, "%s", t[i].deadline);
         fscanf(fp, "%s", t[i].day);
-        fscanf(fp, "%d", t[i].hrs);
+        fscanf(fp, "%d", &t[i].hrs);
     }
     fclose(fp);
     printf("=> %s 파일 로딩 성공!\n", filename);
@@ -115,7 +116,7 @@ int deleteTodo(ToDo *t){
 
 //일정 리스트 출력 기능
 void todoRead(ToDo t){
-    printf("%s  %s  %s  %d %s\n", t.title, t.deadline, t.day, t.hrs, t.check);
+    printf("%s  %s  %s  %d %d\n", t.title, t.deadline, t.day, t.hrs, t.check);
 }
 
 int listTodo(ToDo *t[], int count){

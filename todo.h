@@ -11,7 +11,7 @@ typedef struct {
 
 int selectMenu();
 void saveData(ToDo *t, int count);
-int loadData(Todo *t);
+int loadData(ToDo *t);
 int selectDataNo(ToDo *t[], int count);
 int addTodoByDay(ToDo *t[], int *index, int *count);
 
