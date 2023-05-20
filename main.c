@@ -44,5 +44,9 @@ int main(void) {
         
     }
 
+    else if (menu == 7){ //요일별 일정 추가
+      addTodoByDay(t, &index, &count);
+    }
+
   }
 }
