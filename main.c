@@ -2,7 +2,7 @@
 
 //main
 int main(void) {
-  ToDo *t[100];
+  ToDo t[100];
   int index = 0;
   int count = 0;
   int menu;
@@ -32,7 +32,7 @@ int main(void) {
       printf("정말로 삭제하시겠습니까?(삭제:1)");
       scanf("%d", &deleteok);
       if (deleteok == 1){
-        if (t[no -1] = NULL);
+        if (&t[no -1] == NULL);
            count--;
       }
     }

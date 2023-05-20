@@ -21,6 +21,15 @@ int selectMenu(){
 
 //일정 추가 기능
 int addTodo(ToDo *t){
+  int repeat;
+  char repeatDeadline[20];
+  printf("1. 단순 추가 2. 반복 추가 >> ");
+  scanf("%d", &repeat);
+  if(repeat == 2){
+    printf("반복 추가할 날짜 (format: 20XX-XX-XX)>> ");
+    scanf("%s", &repeatDeadline);
+
+  }
     printf("Title: ");
     scanf("%s", t->title);
     printf("Deadline(format: 20XX-XX-XX): ");
