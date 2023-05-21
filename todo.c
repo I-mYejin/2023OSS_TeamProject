@@ -48,7 +48,6 @@ int addTodo(ToDo *t){
   else{
     printf("Title: ");
     getchar();
-    //scanf("%s", t->title);
     scanf("%[^\ns]", t->title);
     getchar();
     printf("Deadline(format: 20XX-XX-XX): ");
