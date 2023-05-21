@@ -44,6 +44,7 @@ int main(void) {
 
     }
     else if(menu == 6){ //파일 불러오기
+      loadData(t);
         
     }
 
