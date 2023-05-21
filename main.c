@@ -14,54 +14,54 @@ int main(void) {
       break;
     }
     
-    else if (menu == 1) { //ÏùºÏ†ï Ï°∞Ìöå
+    else if (menu == 1) { //¿œ¡§ ¡∂»∏
       if(count > 0) {
         listTodo(t, index);
       }
     }
     
-    else if(menu == 2){ //ÏùºÏ†ï Ï∂îÍ∞Ä
+    else if(menu == 2){ //¿œ¡§ √ﬂ∞°
       count += 1;
       addTodo(&t[index++]);
 
     }
-    else if (menu == 3){ //ÏùºÏ†ï ÏàòÏ†ï
+    else if (menu == 3){ //¿œ¡§ ºˆ¡§
       updateTodo(t);
 
     }
-    else if (menu == 4){ //ÏùºÏ†ï ÏÇ≠Ï†ú
+    else if (menu == 4){ //¿œ¡§ ªË¡¶
       //int no = selectDataNo(t, index);
       // int deleteok;
-      // printf("Ï†ïÎßêÎ°ú ÏÇ≠Ï†úÌïòÏãúÍ≤†ÏäµÎãàÍπå?(ÏÇ≠Ï†ú:1)");
+      // printf("¡§∏ª∑Œ ªË¡¶«œΩ√∞⁄Ω¿¥œ±Ó?(ªË¡¶:1)");
       // scanf("%d", &deleteok);
       // if (deleteok == 1){
       //   if (&t[no -1] == NULL) count--;
       // }
     }
             
-    else if (menu == 5){ //ÌååÏùº Ï†ÄÏû•
+    else if (menu == 5){ //∆ƒ¿œ ¿˙¿Â
       saveData(t, index);
 
     }
-    else if(menu == 6){ //ÌååÏùº Î∂àÎü¨Ïò§Í∏∞
+    else if(menu == 6){ //∆ƒ¿œ ∫“∑Øø¿±‚
       loadData(t);
         
     }
 
-    else if (menu == 7){ //ÏöîÏùºÎ≥Ñ ÏùºÏ†ï Ï∂îÍ∞Ä
+    else if (menu == 7){ //ø‰¿œ∫∞ ¿œ¡§ √ﬂ∞°
       //addTodoByDay(t, &index, &count);
     }
-    else if (menu == 8){ //ÏôÑÎ£å ÌëúÏãú Í∏∞Îä•
+    else if (menu == 8){ //øœ∑· «•Ω√ ±‚¥…
       int no = selectDataNo(t, index);
       int completeok;
-      printf("ÏôÑÎ£åÌïòÏÖ®ÎÇòÏöî? (ÏôÑÎ£å: 1, Ï∑®ÏÜå: 0)");
+      printf("øœ∑·«œºÃ≥™ø‰? (øœ∑·: 1, √Îº“: 0)");
       scanf("%d", &completeok);
       if(completeok == 1){
         completeTodo(&t[no-1]);
-        printf("=> ÏùºÏ†ï ÏôÑÎ£å!\n");
+        printf("=> ¿œ¡§ øœ∑·!\n");
       }
       else{
-        printf("=> Ï∑®ÏÜåÎê®! \n");
+        printf("=> √Îº“µ ! \n");
       }
       
 
