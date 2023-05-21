@@ -47,8 +47,10 @@ int addTodo(ToDo *t){
   }
   else{
     printf("Title: ");
-    scanf("%s", t->title);
+    getchar();
+    //scanf("%s", t->title);
     scanf("%[^\ns]", t->title);
+    getchar();
     printf("Deadline(format: 20XX-XX-XX): ");
     scanf("%s", t->deadline);
     printf("Day(Mon, Tues, Wed, Thurs, Fri, Sat, Sun): ");
