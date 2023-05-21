@@ -9,17 +9,19 @@ typedef struct {
     int check; // ex) 0, 1(완료하면 1 입력받아서 √표시)
 } ToDo;
 
+//은다
 int selectMenu();
+int completeTodo(ToDo *t);
 void saveData(ToDo *t, int count);
 int loadData(ToDo *t);
-int selectDataNo(ToDo *t[], int count);
-int addTodoByDay(ToDo *t[], int *index, int *count);
-
-int deleteTodo(ToDo *t); //일정 삭제
-void todoRead(ToDo t); //일정 리스트 출력
-int listTodo(ToDo *t[], int count);
-
 int addTodo(ToDo *t); //일정 추가
 int updateTodo(ToDo *t); //일정 수정: return addTodo()
-int selectMenu();
+
+//예진
+int selectDataNo(ToDo *t, int count);
+int addTodoByDay(ToDo *t[], int *index, int *count);
+int deleteTodo(ToDo *t); //일정 삭제
+void todoRead(ToDo t); //일정 리스트 출력
+int listTodo(ToDo *t, int count);
+
 
