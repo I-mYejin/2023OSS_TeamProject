@@ -40,6 +40,7 @@ int main(void) {
     }
             
     else if (menu == 5){ //파일 저장
+      saveData(t, index);
 
     }
     else if(menu == 6){ //파일 불러오기
