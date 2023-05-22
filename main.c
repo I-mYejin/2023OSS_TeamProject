@@ -1,10 +1,11 @@
 #include "todo.h"
 
+
 //main
 int main(void) {
-  ToDo t[100];
-  int count = loadData(t);
+  int count = 0;
   int index = count;
+  ToDo *Todo = NULL;
   int menu;
 
   while(1){
@@ -13,59 +14,42 @@ int main(void) {
       printf("Bye!\n");
       break;
     }
-    
-    else if (menu == 1) { //ÀÏÁ¤ Á¶È¸
-      if(count > 0) {
-        listTodo(t, index);
-      }
-    }
-    
-    else if(menu == 2){ //ÀÏÁ¤ Ãß°¡
-      count += 1;
-      addTodo(&t[index++]);
+
+
 
     }
-    else if (menu == 3){ //ÀÏÁ¤ ¼öÁ¤
-      updateTodo(t);
+    else if (menu == 8){ //Â™Â„çŒ·ÂŒ Â‘ÂœÂ‹Âœ
+      int index;
+      completeTodoIndex(&Todo, &count, index);
+      printf("Â™Â„çŒ·ÂŒÂ•Âœ Âì‡±Â•ÂÂ˜ ÂëªƒÂê¹†ÂŠã…»ï¿½ ÂžÂ…ï¿½Î½Â•Â˜Â„ëª„ÂšÂ”: ");
+      scanf("%d", &index);
+      getchar();
+      completeTodo(&Todo, &count, index);
+    }
+      
 
     }
-    else if (menu == 4){ //ÀÏÁ¤ »èÁ¦
-      //int no = selectDataNo(t, index);
-      // int deleteok;
-      // printf("Á¤¸»·Î »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?(»èÁ¦:1)");
-      // scanf("%d", &deleteok);
-      // if (deleteok == 1){
-      //   if (&t[no -1] == NULL) count--;
-      // }
-    }
-            
-    else if (menu == 5){ //ÆÄÀÏ ÀúÀå
-      saveData(t, index);
+  return 0;
 
-    }
-    else if(menu == 6){ //ÆÄÀÏ ºÒ·¯¿À±â
-      loadData(t);
-        
-    }
-
-    else if (menu == 7){ //¿äÀÏº° ÀÏÁ¤ Ãß°¡
+    else if (menu == 7){ //ìš”ì¼ë³„ ì¼ì • ì¶”ê°€
       //addTodoByDay(t, &index, &count);
     }
-    else if (menu == 8){ //¿Ï·á Ç¥½Ã ±â´É
+    else if (menu == 8){ //ì™„ë£Œ í‘œì‹œ ê¸°ëŠ¥
       int no = selectDataNo(t, index);
       int completeok;
-      printf("¿Ï·áÇÏ¼Ì³ª¿ä? (¿Ï·á: 1, Ãë¼Ò: 0)");
+      printf("ì™„ë£Œí•˜ì…¨ë‚˜ìš”? (ì™„ë£Œ: 1, ì·¨ì†Œ: 0)");
       scanf("%d", &completeok);
       if(completeok == 1){
         completeTodo(&t[no-1]);
-        printf("=> ÀÏÁ¤ ¿Ï·á!\n");
+        printf("=> ì¼ì • ì™„ë£Œ!\n");
       }
       else{
-        printf("=> Ãë¼ÒµÊ! \n");
+        printf("=> ì·¨ì†Œë¨! \n");
       }
       
 
     }
 
   }
+
 }
