@@ -3,212 +3,225 @@
 
 int selectMenu(){
     int menu;
-    printf("\n\n *** 1Jung *** \n");
-    printf("0. Á¾·á\n\n");
-    printf("1. ÀÏÁ¤ Á¶È¸\n"); //ÀÏÁ¤ ¸®½ºÆ® Ãâ·Â + ÀÏÁ¤¿Ï·á Ã¼Å©Ç¥½Ã
-    printf("2. ÀÏÁ¤ Ãß°¡\n");
-    printf("3. ÀÏÁ¤ ¼öÁ¤\n");
-    printf("4. ÀÏÁ¤ »èÁ¦\n");
-    printf("5. ÆÄÀÏ ÀúÀå\n");
-    printf("6. ÆÄÀÏ ºÒ·¯¿À±â\n");
-    printf("7. ÀÏÁ¤ Ãß°¡(¿äÀÏº°)\n");
-    printf("8. ÀÏÁ¤ ¿Ï·á\n");
+    printf("\n\n *** 1Jung ***\n\n");
+    printf("0. ì¢…ë£Œ\n\n");
+    printf("1. ì¼ì • ì¡°íšŒ(ë¹¨ë¦¬ ëë‚¼ ìˆ˜ ìˆëŠ” ìˆœì„œ)\n");
+    printf("2. ì¼ì • ì¡°íšŒ(deadlineë³„ ê²€ìƒ‰)\n");
+    printf("3. ì¼ì • ì¶”ê°€\n");
+    printf("4. ì¼ì • ì‚­ì œ\n");
+    printf("5. ì¼ì • ìˆ˜ì •\n");
+    printf("6. íŒŒì¼ ì €ì¥\n");
+    printf("7. íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°\n");
+    printf("8. ì¼ì • ì™„ë£Œ í‘œì‹œ\n");
     printf("Select Menu: ");
     scanf("%d", &menu);
+    getchar();
     return menu;   
 }
 
-//ÀÏÁ¤ ¿Ï·á ±â´É
-int completeTodo(ToDo *t){
-  t->check = 1;
-  return 1;
+// ë¹„êµ í•¨ìˆ˜
+int compare(const void *a, const void *b) {
+  ToDo *scheduleA = (ToDo *)a;
+  ToDo *scheduleB = (ToDo *)b;
+
+  // ì˜ˆìƒ ì†Œìš” ì‹œê°„ì— ë”°ë¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
+  return scheduleA->hrs - scheduleB->hrs;
 }
 
-//ÀÏÁ¤ Ãß°¡ ±â´É
-int addTodo(ToDo *t){
-  int repeat;
-  char repeatDeadline[20];
-  int repeatDays;
-  printf("1. ´Ü¼ø Ãß°¡ 2. ¹İº¹ Ãß°¡ >> ");
-  scanf("%d", &repeat);
-  if(repeat == 2){
-    printf("last date to add Todo(format: 20XX-XX-XX)>> "); //¹İº¹ ÀÏÁ¤À» Ãß°¡ÇÒ ¸¶Áö¸· ³¯Â¥
-    scanf("%s", repeatDeadline);
+//ì¼ì • ì¶”ê°€ ê¸°ëŠ¥
+void addTodo(ToDo **Todo, int *count){
+ (*count)++;
+  *Todo = (ToDo *)realloc(*Todo, *count * sizeof(ToDo));
 
-    printf("Title: ");
-    scanf("%s", t->title);
-    printf("Deadline(format: after * days): ");
-    scanf("%d", &repeatDays);
-    printf("Estimated time to complete(hrs): ");
-    scanf("%d", &t->hrs);
-    printf("=> »õ·Î¿î ¹İº¹ ÀÏÁ¤ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù!");
-    return 1;
+  printf("Title: ");
+  fgets((*Todo)[*count - 1].title, 100, stdin);
+  (*Todo)[*count - 1].title[strcspn((*Todo)[*count - 1].title, "\n")] =
+      '\0'; // ê°œí–‰ ë¬¸ì ì œê±°
 
-  }
-  else{
-    printf("Title: ");
-    getchar();
-    scanf("%[^\ns]", t->title);
-    getchar();
-    printf("Deadline(format: 20XX-XX-XX): ");
-    scanf("%s", t->deadline);
-    printf("Day(Mon, Tues, Wed, Thurs, Fri, Sat, Sun): ");
-    scanf("%s", t->day);
-    printf("Estimated time to complete(hrs): ");
-    scanf("%d", &t->hrs);
-    printf("=> »õ·Î¿î ÀÏÁ¤ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù!");
-    return 1;
+  printf("Deadline (YYYY-MM-DD): ");
+  fgets((*Todo)[*count - 1].deadline, 20, stdin);
+  (*Todo)[*count - 1].deadline[strcspn((*Todo)[*count - 1].deadline, "\n")] ='\0'; // ê°œí–‰ ë¬¸ì ì œê±°
+
+  printf("Estimated time to complete(hrs): ");
+  scanf("%d", &(*Todo)[*count - 1].hrs);
+  getchar(); // ê°œí–‰ ë¬¸ì ì œê±°
+  printf("ìƒˆë¡œìš´ 1Jungì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤!\n");
+}
+// ì¼ì • ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ í•¨ìˆ˜
+void printTodoList(ToDo *Todo, int count) {
+  if (count == 0) {
+    printf("ì¼ì •ì´ ì—†ìŠµë‹ˆë‹¤.\n");
+  } else {
+    // ì •ë ¬
+    qsort(Todo, count, sizeof(ToDo), compare);
+
+    // ê²°ê³¼ ì¶œë ¥
+    printf("\nDone  Title      Estimated_time(hrs)    Deadline\n");
+    printf("=========================================================\n");
+    for (int i = 0; i < count; i++) {
+      if(Todo[i].check == 1) {
+        printf("  âˆš  ");
+      } else {
+        printf("     ");
+      }
+      printf("%-15s  %3d            %s\n", Todo[i].title, Todo[i].hrs, Todo[i].deadline);
+    }
   }
 }
-//¹Ì¿Ï¼º
+
+//ì¼ì • ì™„ë£Œ ì²´í¬ í•¨ìˆ˜
+void completeTodo(ToDo **Todo, int *count, int index) {
+  if (index >= 0 && index < *count) {
+    (*Todo)[index].check = 1;
+    printf("ì¼ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
+  } else {
+    printf("ìœ íš¨í•˜ì§€ ì•Šì€ ì¸ë±ìŠ¤ì…ë‹ˆë‹¤.\n");
+  }
+}
+
+//ì¼ì • ì¸ë±ìŠ¤ ë¦¬ìŠ¤íŠ¸ í•¨ìˆ˜
+void completeTodoIndex(ToDo **Todo, int *count, int index) {
+  printf("ì¼ì •ì˜ ì¸ë±ìŠ¤ ë¦¬ìŠ¤íŠ¸:\n");
+    for (int i = 0; i < *count; i++) {
+      printf("%d. %s\n", i, (*Todo)[i].title);
+    }
+}
+
+  // ë°ë“œë¼ì¸ì¸ ê³¼ì œ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ í•¨ìˆ˜
+void printDeadlineList(ToDo *Todo, int count, char *today){
+  if (count == 0) {
+    printf("ì¼ì •ì´ ì—†ìŠµë‹ˆë‹¤.\n");
+  } 
+  else {
+    printf("[1Jung due %s]", Todo->deadline);
+    printf("\nTitle  Estimated_time(hrs)\n");
+    printf("==================================\n");
+    for (int i = 0; i < count; i++) {
+      if (strcmp(today, Todo[i].deadline) == 0) {
+        printf("%10s  %3d\n", Todo[i].title, Todo[i].hrs);
+      }
+    }
+  }
+}
+//íŒŒì¼ ì €ì¥
 void saveData(ToDo *t, int count){
     FILE *fp;
     char filename[20];
-    printf("ÀúÀåÇÒ ÆÄÀÏ ÀÌ¸§: ");
+    printf("ì €ì¥í•  íŒŒì¼ ì´ë¦„: ");
     scanf("%s", filename);
 
     fp = fopen(filename, "wt");
-    printf("\nNo Title Deadline Day Hours Finish\n");
-    
-    for(int i=0; i<count; i++){
-        if(t[i].hrs == -1) continue;
-        fprintf(fp, "%2d %s %s %s %d %d\n", i+1, t[i].title, t[i].deadline, t[i].day, t[i].hrs, t[i].check);
+    qsort(t, count, sizeof(t), compare);
+
+    // ê²°ê³¼ ì¶œë ¥
+    fprintf(fp,"\nTitle  Estimated_time(hrs)  Deadline\n");
+    fprintf(fp,"============================================\n");
+    for (int i = 0; i < count; i++) {
+        if(t[i].check != 1) fprintf(fp,"%3s  %7d         %s\n", t[i].title, t[i].hrs, t[i].deadline);
     }
     fclose(fp);
-    printf("=> %s ÆÄÀÏ¿¡ ÀúÀåµÊ! \n",filename);
+    printf("=> %s íŒŒì¼ì— ì €ì¥ë¨! \n",filename);
 
 }
-//¹Ì¿Ï¼º
-int loadData(ToDo *t){
-    int i, count = 0;
+//íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
+int loadData(ToDo **Todo, int *count){
+    int i;
     FILE *fp;
     char filename[20];
-    printf("ºÒ·¯¿Ã ÆÄÀÏ ÀÌ¸§: ");
+    char str[100]; //trash can
+    printf("ë¶ˆëŸ¬ì˜¬ íŒŒì¼ ì´ë¦„: ");
     scanf("%s", filename);
     
     fp=fopen(filename, "rt");
     if(fp == NULL){
-        printf("=> ÆÄÀÏ ¾øÀ½! \n");
+        printf("=> íŒŒì¼ ì—†ìŒ! \n");
         return 0;
     }
-    for(i=0; i<100; i++){
-        fscanf(fp, "%s", t[i].title);
+    fgets(str, 100, fp); //í•„ìš”ì—†ëŠ” ë²„ë¦¬ê¸°
+    fgets(str, 100, fp);
+    fgets(str, 100, fp);
+    for(int i=0; i<100; i++){
+        (*count) ++;
+        *Todo = (ToDo *)realloc(*Todo, *count * sizeof(ToDo));
+        fscanf(fp, "%[^\t]s",(*Todo)[*count-1].title);
+        (*Todo)[*count - 1].title[strcspn((*Todo)[*count - 1].title, "\n")] ='\0';
         if(feof(fp)) break;
-        fscanf(fp, "%s", t[i].deadline);
-        fscanf(fp, "%s", t[i].day);
-        fscanf(fp, "%d", &t[i].hrs);
+        fscanf(fp, "%d", &(*Todo)[*count - 1].hrs);
+        fscanf(fp, "%[^\n]s", (*Todo)[*count - 1].deadline);
+        (*Todo)[*count - 1].deadline[strcspn((*Todo)[*count - 1].deadline, "\n")] ='\0';
+        fgets(str, 100, fp);
+        fgets(str, 100, fp);
+        fgets(str, 100, fp);
+    
     }
     fclose(fp);
-    printf("=> %s ÆÄÀÏ ·Îµù ¼º°ø!\n", filename);
-    return i; //ÃÑ ¸î°³ÀÇ µ¥ÀÌÅºÁö ¸®ÅÏ
-
+    printf("=> %s íŒŒì¼ ë¡œë”© ì„±ê³µ!\n", filename);
+    return *count; //ì´ ëª‡ê°œì˜ ë°ì´íƒ„ì§€ ë¦¬í„´
 }
 
-int updateTodo(ToDo *t){
-    return addTodo(t);
+void updateTodo(ToDo **Todo, int *count){
+    int index;
+    printf("<ìˆ˜ì •í•  ì¼ì •ì˜ ì¸ë±ìŠ¤ ë¦¬ìŠ¤íŠ¸>\n");
+   for (int i = 0; i < *count; i++) {
+     printf("%d. %3s  %7d         %s\n", i, (*Todo)[i].title, (*Todo)[i].hrs, (*Todo)[i].deadline);
+   }
+    printf("ìˆ˜ì •í•  ì¼ì •ì˜ ì¸ë±ìŠ¤ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
+   scanf("%d", &index);
+   getchar(); // ê°œí–‰ ë¬¸ì ì œê±°
+    int update;
+    printf("ìˆ˜ì •í•  ë¶€ë¶„(1. ì œëª© 2. ì‹œê°„ 3. deadline): ");
+    scanf("%d", &update);
+    getchar();
+    char updatesT[100];
+    int updatesH;
+    char updatesD[10];
+    if(update == 1){
+        printf("ìˆ˜ì • ì‚¬í•­: ");
+        fgets(updatesT, 100, stdin);
+        updatesT[strcspn(updatesT, "\n")] ='\0';
+        strcpy((*Todo)[index].title, updatesT);
+    }
+    else if(update == 2){
+        printf("ìˆ˜ì • ì‚¬í•­: ");
+        scanf("%d", &updatesH);
+        (*Todo)[index].hrs= updatesH;
+
+    }
+    else if(update == 3){
+        printf("ìˆ˜ì • ì‚¬í•­: ");
+        fgets(updatesD, 100, stdin);
+        updatesD[strcspn(updatesD, "\n")] ='\0';
+        strcpy((*Todo)[index].deadline, updatesD);
+
+    }
+  printf("1Jungì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤!\n");
+}
+
+void deleteTodo(ToDo **Todo, int *count, int index) {
+  if (index >= 0 && index < *count) {
+    printf("<ì‚­ì œí•  ì¼ì •ì˜ ì¸ë±ìŠ¤ ë¦¬ìŠ¤íŠ¸>\n");
+    for (int i = 0; i < *count; i++) {
+      printf("%d. %s\n", i, (*Todo)[i].title);
     }
 
-int selectDataNo(ToDo *t, int count){
-    int no;
-    listTodo(t, count);
-    printf("¹øÈ£´Â?");
-    scanf("%d", &no);
-    return no;
-}
+    printf("ì‚­ì œí•  ì¼ì •ì˜ ì¸ë±ìŠ¤ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
+    scanf("%d", &index);
+    getchar(); // ê°œí–‰ ë¬¸ì ì œê±°
 
-// //ÀÏÁ¤ »èÁ¦ ±â´É
-// int deleteTodo(ToDo *t){
-//     t->check = -1;
-//     return 1;
-// }
-
-
-//¿À´Ã ÀÏÁ¤ ¸®½ºÆ® Ãâ·Â ±â´É
-void todoRead(ToDo t){
-    printf("%s  %s  %s  %d %d\n", t.title, t.deadline, t.day, t.hrs);
-}
-
-//deadline ÀÏÁ¤ Ãâ·Â
-void readDeadline(ToDo t){
-  printf("%s  %s  %s  %d %d\n", t.title, t.hrs);
-}
-
-void todoByDeadline(ToDo t){
-  printf("\n%s %s\n", t.deadline, t.day);
-}
-
-
-int listTodo(ToDo *t, int count){
-    printf("\nNo    Title   Deadline    Day     Hours   Finish\n");
-    printf("====================================================\n");
-    for(int i=0; i<count; i++){
-        if(t[i].check == -1) continue;
-        printf("%2d    ", i+1);
-        todoRead(t[i]);
-        //ÀÏÁ¤¿Ï·á Ã¼Å©Ç¥½Ã
-        if(t[i].check == 1){ 
-            printf("  ¡î\n");
-        } else {
-            printf(" ");
-        }
+    if (index >= 0 && index < *count) {
+      for (int i = index; i < *count - 1; i++) {
+        strcpy((*Todo)[i].title, (*Todo)[i + 1].title);
+        (*Todo)[i].hrs = (*Todo)[i + 1].hrs;
+        strcpy((*Todo)[i].deadline, (*Todo)[i + 1].deadline);
+      }
+      (*count)--;
+      *Todo = (ToDo *)realloc(*Todo, *count * sizeof(ToDo));
+      printf("ì¼ì •ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n");
+    } else {
+      printf("ìœ íš¨í•˜ì§€ ì•Šì€ ì¸ë±ìŠ¤ì…ë‹ˆë‹¤.\n");
     }
-    printf("\n");
-    return 1;
+  } else {
+    printf("ìœ íš¨í•˜ì§€ ì•Šì€ ì¸ë±ìŠ¤ì…ë‹ˆë‹¤.\n");
+  }
 }
 
-//ÀÏÁ¤ Ãß°¡ ±â´É (¿äÀÏº°·Î)
-// void addTodoByDay(ToDo *t[], int *index, int *count) {
-//   int dayMenu;
-//   printf("¿äÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä:\n");
-//   printf("1. ¿ù¿äÀÏ\n");
-//   printf("2. È­¿äÀÏ\n");
-//   printf("3. ¼ö¿äÀÏ\n");
-//   printf("4. ¸ñ¿äÀÏ\n");
-//   printf("5. ±İ¿äÀÏ\n");
-//   printf("6. Åä¿äÀÏ\n");
-//   printf("7. ÀÏ¿äÀÏ\n");
-//   printf("Select Day: ");
-//   scanf("%d", &dayMenu);
-
-//   if (dayMenu < 1 || dayMenu > 7) {
-//     printf("Àß¸øµÈ ¼±ÅÃÀÔ´Ï´Ù.\n");
-//     return;
-//   }
-//     char day[10];
-//   switch (dayMenu) {
-//     case 1:
-//       strcpy(day, "Mon");
-//       break;
-//     case 2:
-//       strcpy(day, "Tue");
-//       break;
-//     case 3:
-//       strcpy(day, "Wed");
-//       break;
-//     case 4:
-//       strcpy(day, "Thu");
-//       break;
-//     case 5:
-//       strcpy(day, "Fri");
-//       break;
-//     case 6:
-//       strcpy(day, "Sat");
-//       break;
-//     case 7:
-//       strcpy(day, "Sun");
-//       break;
-//   }
-
-//   printf("Title: ");
-//   scanf("%s", t[*index]->title);
-//   printf("Deadline (format: 20XX-XX-XX): ");
-//   scanf("%s", t[*index]->deadline);
-//   strcpy(t[*index]->day, day);
-//   printf("Estimated time to complete (hrs): ");
-//   scanf("%d", &t[*index]->hrs);
-//   t[*index]->check = 0;
-
-//   printf("=> »õ·Î¿î ÀÏÁ¤ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù!\n");
-//   (*index)++;
-//   (*count)++;
-// }
