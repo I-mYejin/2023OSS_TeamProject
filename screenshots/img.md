@@ -12,7 +12,8 @@ completeTodo/completeTodoIndex함수 실행
 ![image](https://github.com/I-mYejin/2023OSS_TeamProject/assets/127292731/5f3ff784-1e7c-4e8a-8ca4-01bfa47e3918)
 
 printTodoList/printDeadlineList함수 실행
-![image](https://github.com/I-mYejin/2023OSS_TeamProject/assets/127292731/6392e40f-e5c6-43e9-9aea-2a02312635ec)
+![image](https://github.com/I-mYejin/2023OSS_TeamProject/assets/127292731/67768331-1d43-4b66-8d4d-f45a3a3de434)
+
 
 saveData함수 실행 (파일 저장)
 ![image](https://github.com/I-mYejin/2023OSS_TeamProject/assets/127292731/6500cf83-27df-46a5-be77-91b239629850)
