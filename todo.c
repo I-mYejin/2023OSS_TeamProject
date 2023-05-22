@@ -224,4 +224,3 @@ void deleteTodo(ToDo **Todo, int *count, int index) {
     printf("유효하지 않은 인덱스입니다.\n");
   }
 }
-
