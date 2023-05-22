@@ -1,26 +1,24 @@
 //todo.h
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct {
-    char title[100]; //ex) OSS Lab11
-    char deadline[20]; //ex) 2023-05-08
-    char day[10]; // ex) Mon
-    int hrs; //ex) 4(예상 소요 시간)
-    int check; // ex) 0, 1(완료하면 1 입력받아서 √표시)
+  char title[100]; // ex) OSSLab11
+  int hrs;
+  char deadline[20];
+  int check;
 } ToDo;
 
-//은다
 int selectMenu();
-int completeTodo(ToDo *t);
+int compare(const void *a, const void *b);
+void addTodo(ToDo **Todo, int *numTodo);
+void printTodoList(ToDo *Todo, int numTodo);
+void printDeadlineList(ToDo *Todo, int numTodo, char *today);
 void saveData(ToDo *t, int count);
-int loadData(ToDo *t);
-int addTodo(ToDo *t); //일정 추가
-int updateTodo(ToDo *t); //일정 수정: return addTodo()
-
-//예진
-int selectDataNo(ToDo *t, int count);
-int addTodoByDay(ToDo *t[], int *index, int *count);
-int deleteTodo(ToDo *t); //일정 삭제
-void todoRead(ToDo t); //일정 리스트 출력
-int listTodo(ToDo *t, int count);
+int loadData(ToDo **Todo, int *count);
+void deleteTodo(ToDo **Todo, int *count, int index);
+void updateTodo(ToDo **Todo, int *count);
+void completeTodo(ToDo **Todo, int *count, int index);
+void completeTodoIndex(ToDo **Todo, int *count, int index);
 
