@@ -21,4 +21,3 @@ void deleteTodo(ToDo **Todo, int *count, int index);
 void updateTodo(ToDo **Todo, int *count);
 void completeTodo(ToDo **Todo, int *count, int index);
 void completeTodoIndex(ToDo **Todo, int *count, int index);
-

@@ -14,6 +14,7 @@ int main(void) {
       printf("Bye!\n");
       break;
     }
+
     else if (menu == 1) { 
      printTodoList(Todo, count);
     }
